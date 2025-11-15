@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vorsy Pizza - Online Ordering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    /* ============================
+       General Styles
+    ============================ */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background: #d32f2f;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 36px;
+      font-family: 'Fredoka One', cursive;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0 0;
+      text-align: center;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      color: #ffe5d4;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    h2 {
+      color: #d32f2f;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* ============================
+       Hero Section (Homepage)
+    ============================ */
+    .hero {
+      text-align: center;
+      margin: 50px 20px;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    .btn-order {
+      display: inline-block;
+      background: #d32f2f;
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 10px;
+      font-size: 20px;
+      transition: background 0.3s;
+    }
+
+    .btn-order:hover {
+      background: #a50d0d;
+    }
+
+    /* ============================
+       Menu Section
+    ============================ */
+    .menu-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .menu-item {
+      width: 200px;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .menu-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .menu-item h3 {
+      margin: 10px 0 5px 0;
+    }
+
+    .menu-item p {
+      margin: 5px 0 10px 0;
+      font-weight: bold;
+    }
+
+    .menu-search {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .menu-search input {
+      padding: 10px;
+      width: 200px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    /* ============================
+       Order Form
+    ============================ */
+    .order-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      max-width: 500px;
+      margin: 0 auto 30px auto;
+    }
+
+    .order-container input,
+    .order-container select,
+    .order-container button {
+      padding: 10px;
+      margin: 8px 0;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .button-box {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .button-box button {
+      width: 60%;
+      background: #d32f2f;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 8px;
+    }
+
+    .button-box button:hover {
+      background: #a50d0d;
+    }
+
+    /* ============================
+       Orders Table
+    ============================ */
+    table {
+      border-collapse: collapse;
+      width: 95%;
+      max-width: 1000px;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    table th {
+      background: #d32f2f;
+      color: white;
+      font-size: 16px;
+    }
+
+    /* ============================
+       Process Section
+    ============================ */
+    .section {
+      background: rgba(255,255,255,0.9);
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 800px;
+      margin: 20px auto;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    /* ============================
+       Flowchart Section
+    ============================ */
+    .flowchart {
+      max-width: 1000px;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    .flowchart svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* ============================
+       Footer
+    ============================ */
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #d32f2f;
+      color: white;
+      margin-top: 20px;
+    }
+
+    /* ============================
+       Responsive
+    ============================ */
+    @media (max-width: 768px) {
+      header h1 { font-size: 28px; }
+      .hero h2 { font-size: 28px; }
+      .hero p { font-size: 18px; }
+      .btn-order { font-size: 18px; padding: 12px 25px; }
+      .menu-container { flex-direction: column; align-items: center; }
+    }
+  </style>
+
+  <script>
+    // ===============================
+    // Pizza Menu Search
+    // ===============================
+    function searchMenu() {
+      const input = document.getElementById('menuSearch').value.toLowerCase();
+      const items = document.querySelectorAll('.menu-item');
+      items.forEach(item => {
+        const name = item.querySelector('h3').innerText.toLowerCase();
+        if(name.includes(input)) item.style.display = '';
+        else item.style.display = 'none';
+      });
+    }
+
+    // ===============================
+    // Add Order to Table
+    // ===============================
+    function addOrder(event) {
+      event.preventDefault();
+      const name = document.getElementById('customerName').value;
+      const contact = document.getElementById('contact').value;
+      const address = document.getElementById('address').value;
+      const pizza = document.getElementById('pizzaType').value;
+      const size = document.getElementById('pizzaSize').value;
+      const quantity = parseInt(document.getElementById('quantity').value);
+      const date = document.getElementById('deliveryDate').value;
+      const time = document.getElementById('deliveryTime').value;
+
+      if(!name || !contact || !address || !pizza || !size || !quantity || !date || !time) {
+        alert("Please fill out all fields before submitting.");
+        return;
+      }
+
+      let price = 0;
+      if(size === "Small") price = 100;
+      else if(size === "Medium") price = 180;
+      else if(size === "Large") price = 250;
+
+      const total = price * quantity;
+
+      const table = document.getElementById('orderTable');
+      const newRow = table.insertRow();
+      newRow.insertCell(0).innerText = name;
+      newRow.insertCell(1).innerText = contact;
+      newRow.insertCell(2).innerText = address;
+      newRow.insertCell(3).innerText = pizza;
+      newRow.insertCell(4).innerText = size;
+      newRow.insertCell(5).innerText = quantity;
+      newRow.insertCell(6).innerText = date;
+      newRow.insertCell(7).innerText = time;
+      newRow.insertCell(8).innerText = "₱" + total;
+
+      document.getElementById('orderForm').reset();
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>🍕 VORSY PIZZA</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#order">Order Now</a></li>
+        <li><a href="#flowchart">Flowchart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="hero">
+      <h2>Welcome to Vorsy Pizza Online Ordering!</h2>
+      <p>Order your favorite pizza online and get it delivered hot and fresh right to your door.</p>
+      <a href="#order" class="btn-order">Order Now 🍕</a>
+
+      <div class="menu-search">
+        <input type="text" id="menuSearch" onkeyup="searchMenu()" placeholder="Search Pizza...">
+      </div>
+      <div class="menu-container">
+        <div class="menu-item">
+          <img src="images/pepperoni.jpg" alt="Pepperoni Pizza">
+          <h3>Pepperoni</h3>
+          <p>₱100 - ₱250</p>
+        </div>
+        <div class="menu-item">
+          <img src="images/hawaiian.jpg" alt="Hawaiian Pizza">
+          <h3>Hawaiian</h3>
+          <p>₱100 - ₱250</p>
+        </div>
+        <div class="menu-item">
+          <img src="images/cheese.jpg" alt="Cheese Pizza">
+          <h3>Cheese</h3>
+          <p>₱100 - ₱250</p>
+        </div>
+        <div class="menu-item">
+          <img src="images/veggie.jpg" alt="Veggie Pizza">
+          <h3>Veggie</h3>
+          <p>₱100 - ₱250</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="section">
+      <h2>Ordering Process</h2>
+      <ol>
+        <li>Open the Vorsy Pizza Homepage.</li>
+        <li>Scroll to the Order Section.</li>
+        <li>Fill out the order form (name, pizza type, size, quantity, address).</li>
+        <li>System validates the inputs.</li>
+        <li>Total price is calculated automatically.</li>
+        <li>Order is added to the Orders List.</li>
+        <li>Delivery is scheduled for selected date and time.</li>
+      </ol>
+    </section>
+
+    <!-- Order Section -->
+    <section id="order" class="section order-section">
+      <h2>Pizza Order Form</h2>
+      <div class="order-container">
+        <form id="orderForm" onsubmit="addOrder(event)">
+          <input type="text" id="customerName" placeholder="Customer Name" required>
+          <input type="text" id="contact" placeholder="Contact Number" required>
+          <input type="text" id="address" placeholder="Delivery Address" required>
+          <select id="pizzaType" required>
+            <option value="">Select Pizza</option>
+            <option value="Pepperoni">Pepperoni</option>
+            <option value="Hawaiian">Hawaiian</option>
+            <option value="Cheese">Cheese</option>
+            <option value="Veggie">Veggie</option>
+          </select>
+          <select id="pizzaSize" required>
+            <option value="">Select Size</option>
+            <option value="Small">Small - ₱100</option>
+            <option value="Medium">Medium - ₱180</option>
+            <option value="Large">Large - ₱250</option>
+          </select>
+          <input type="number" id="quantity" min="1" value="1" required>
+          <input type="date" id="deliveryDate" required>
+          <input type="time" id="deliveryTime" required>
+          <div class="button-box">
+            <button type="submit">Place Order</button>
+          </div>
+        </form>
+      </div>
+
+      <h2>Orders List</h2>
+      <table id="orderTable">
+        <tr>
+          <th>Customer Name</th>
+          <th>Contact</th>
+          <th>Address</th>
+          <th>Pizza Type</th>
+          <th>Size</th>
+          <th>Quantity</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Total Price</th>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Flowchart Section -->
+    <section id="flowchart" class="flowchart">
+      <h2>Ordering Flowchart</h2>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1600">
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="#d32f2f" />
+          </marker>
+        </defs>
+        <rect x="360" y="40" width="480" height="80" rx="40" fill="#ffb997"/>
+        <text x="600" y="92" text-anchor="middle" font-size="24" font-weight="bold" fill="white">Start</text>
+        <rect x="250" y="180" width="700" height="100" rx="20" fill="#fff" stroke="#d32f2f" stroke-width="3"/>
+        <text x="600" y="235" text-anchor="middle" font-size="22" font-weight="bold" fill="#333">Open Homepage</text>
+        <rect x="300" y="320" width="600" height="80" rx="18" fill="#fff" stroke="#d32f2f" stroke-width="3"/>
+        <text x="600" y="370" text-anchor="middle" font-size="22" font-weight="bold" fill="#333">Go to Order Page</text>
+        <rect x="200" y="460" width="800" height="100" rx="20" fill="#fff" stroke="#d32f2f" stroke-width="3"/>
+        <text x="600" y="510" text-anchor="middle" font-size="22" font-weight="bold" fill="#333">Fill Out Order Form</text>
+        <polygon points="600,620 720,700 600,780 480,700" fill="#fff" stroke="#d32f2f" stroke-width="3"/>
+        <text x="600" y="710" text-anchor="middle" font-size="22" font-weight="bold" fill="#333">Validate Input</text>
+        <rect x="300" y="820" width="600" height="80" rx="18" fill="#fff" stroke="#d32f2f" stroke-width="3"/>
+        <text x="600" y="870" text-anchor="middle" font-size="22" font-weight="bold" fill="#333">Calculate Total Price</text>
+        <rect x="300" y="940" width="600" height="90" rx="18" fill="#fff" stroke="#d32f2f" stroke-width="3"/>
+        <text x="600" y="990" text-anchor="middle" font-size="22" font-weight="bold" fill="#333">Save Order Data</text>
+        <rect x="360" y="1080" width="480" height="80" rx="40" fill="#ffb997"/>
+        <text x="600" y="1130" text-anchor="middle" font-size="24" font-weight="bold" fill="white">End</text>
+        <g stroke="#d32f2f" stroke-width="3" fill="none" marker-end="url(#arrow)">
+          <path d="M600 120 L600 180" />
+          <path d="M600 280 L600 320" />
+          <path d="M600 400 L600 460" />
+          <path d="M600 780 L600 820" />
+          <path d="M600 900 L600 940" />
+          <path d="M600 1030 L600 1080" />
+        </g>
+      </svg>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Vorsy Pizza</p>
+  </footer>
+</body>
+  </html>
